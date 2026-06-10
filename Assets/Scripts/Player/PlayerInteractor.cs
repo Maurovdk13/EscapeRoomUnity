@@ -9,13 +9,20 @@ public class PlayerInteractor : MonoBehaviour
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
+        Debug.DrawRay(ray.origin, ray.direction * interactDistance, Color.red);
+
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistance))
         {
             InteractableObject interactable = hitInfo.collider.GetComponent<InteractableObject>();
 
-            if (interactable != null && Input.GetKeyDown(KeyCode.E))
+            if (interactable != null)
             {
-                interactable.Interact();
+                Debug.Log("Looking at: " + interactable.name);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactable.Interact();
+                }
             }
         }
     }
